@@ -1,0 +1,436 @@
+[
+  {
+    "id": 1,
+    "judul": "Inception",
+    "tahun": 2010,
+    "genre": "Sci-Fi",
+    "rating": 8.8,
+    "gambar": "https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg",
+    "sutradara": {
+      "nama": "Christopher Nolan",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 148,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Warner Bros",
+      "budget": "160M USD"
+    }
+  },
+  {
+    "id": 2,
+    "judul": "Interstellar",
+    "tahun": 2014,
+    "genre": "Sci-Fi",
+    "rating": 8.6,
+    "gambar": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
+    "sutradara": {
+      "nama": "Christopher Nolan",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 169,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Paramount",
+      "budget": "165M USD"
+    }
+  },
+  {
+    "id": 3,
+    "judul": "Avengers: Endgame",
+    "tahun": 2019,
+    "genre": "Action",
+    "rating": 8.4,
+    "gambar": "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
+    "sutradara": {
+      "nama": "Russo Brothers",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 181,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Marvel Studios",
+      "budget": "356M USD"
+    }
+  },
+  {
+    "id": 4,
+    "judul": "Parasite",
+    "tahun": 2019,
+    "genre": "Drama",
+    "rating": 8.5,
+    "gambar": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "sutradara": {
+      "nama": "Bong Joon-ho",
+      "negara": "Korea"
+    },
+    "detail": {
+      "durasi": 132,
+      "bahasa": "Korean",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "CJ Entertainment",
+      "budget": "11M USD"
+    }
+  },
+  {
+    "id": 5,
+    "judul": "Joker",
+    "tahun": 2019,
+    "genre": "Drama",
+    "rating": 8.3,
+    "gambar": "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+    "sutradara": {
+      "nama": "Todd Phillips",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 122,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Warner Bros",
+      "budget": "55M USD"
+    }
+  },
+
+  {
+    "id": 6,
+    "judul": "Titanic",
+    "tahun": 1997,
+    "genre": "Romance",
+    "rating": 7.9,
+    "gambar": "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",
+    "sutradara": {
+      "nama": "James Cameron",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 195,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "20th Century Fox",
+      "budget": "200M USD"
+    }
+  },
+  {
+    "id": 7,
+    "judul": "The Dark Knight",
+    "tahun": 2008,
+    "genre": "Action",
+    "rating": 9.0,
+    "gambar": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    "sutradara": {
+      "nama": "Christopher Nolan",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 152,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Warner Bros",
+      "budget": "185M USD"
+    }
+  },
+
+  {
+    "id": 8,
+    "judul": "Frozen",
+    "tahun": 2013,
+    "genre": "Animation",
+    "rating": 7.5,
+    "gambar": "https://image.tmdb.org/t/p/w500/kgwjIb2JDHRhNk13lmSxiClFjVk.jpg",
+    "sutradara": {
+      "nama": "Chris Buck",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 102,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Disney",
+      "budget": "150M USD"
+    }
+  },
+
+  {
+    "id": 9,
+    "judul": "Spiderman No Way Home",
+    "tahun": 2021,
+    "genre": "Action",
+    "rating": 8.2,
+    "gambar": "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+    "sutradara": {
+      "nama": "Jon Watts",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 148,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Marvel",
+      "budget": "200M USD"
+    }
+  },
+
+  {
+    "id": 10,
+    "judul": "Up",
+    "tahun": 2009,
+    "genre": "Animation",
+    "rating": 8.2,
+    "gambar": "https://image.tmdb.org/t/p/w500/qh9KBbYl0z8olYg0y1F9y1pKkYp.jpg",
+    "sutradara": {
+      "nama": "Pete Docter",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 96,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Pixar",
+      "budget": "175M USD"
+    }
+  },
+
+  {
+    "id": 11,
+    "judul": "The Conjuring",
+    "tahun": 2013,
+    "genre": "Horror",
+    "rating": 7.5,
+    "gambar": "https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg",
+    "sutradara": {
+      "nama": "James Wan",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 112,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "New Line",
+      "budget": "20M USD"
+    }
+  },
+
+  {
+    "id": 12,
+    "judul": "Insidious",
+    "tahun": 2010,
+    "genre": "Horror",
+    "rating": 6.8,
+    "gambar": "https://image.tmdb.org/t/p/w500/wk2l2R0iZ9V0Yc8N6E1A0xqJkXy.jpg",
+    "sutradara": {
+      "nama": "James Wan",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 103,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "FilmDistrict",
+      "budget": "1.5M USD"
+    }
+  },
+
+  {
+    "id": 13,
+    "judul": "La La Land",
+    "tahun": 2016,
+    "genre": "Romance",
+    "rating": 8.0,
+    "gambar": "https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+    "sutradara": {
+      "nama": "Damien Chazelle",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 128,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Summit",
+      "budget": "30M USD"
+    }
+  },
+
+  {
+    "id": 14,
+    "judul": "Harry Potter",
+    "tahun": 2001,
+    "genre": "Fantasy",
+    "rating": 7.6,
+    "gambar": "https://image.tmdb.org/t/p/w500/5a6Fz3l7yM4j3Y7jH5pCzv1Z9e.jpg",
+    "sutradara": {
+      "nama": "Chris Columbus",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 152,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Warner Bros",
+      "budget": "125M USD"
+    }
+  },
+
+  {
+    "id": 15,
+    "judul": "The Matrix",
+    "tahun": 1999,
+    "genre": "Sci-Fi",
+    "rating": 8.7,
+    "gambar": "https://image.tmdb.org/t/p/w500/aOIuZAjPaRIE6CMzbazvcHuHXDc.jpg",
+    "sutradara": {
+      "nama": "Wachowski",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 136,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Warner Bros",
+      "budget": "63M USD"
+    }
+  },
+
+  {
+    "id": 16,
+    "judul": "Coco",
+    "tahun": 2017,
+    "genre": "Animation",
+    "rating": 8.4,
+    "gambar": "https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg",
+    "sutradara": {
+      "nama": "Lee Unkrich",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 105,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Pixar",
+      "budget": "175M USD"
+    }
+  },
+
+  {
+    "id": 17,
+    "judul": "The Nun",
+    "tahun": 2018,
+    "genre": "Horror",
+    "rating": 5.3,
+    "gambar": "https://image.tmdb.org/t/p/w500/sFC1ElvoKGdHJIWRpNB3xWJ9lJA.jpg",
+    "sutradara": {
+      "nama": "Corin Hardy",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 96,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Warner Bros",
+      "budget": "22M USD"
+    }
+  },
+
+  {
+    "id": 18,
+    "judul": "Moana",
+    "tahun": 2016,
+    "genre": "Animation",
+    "rating": 7.6,
+    "gambar": "https://image.tmdb.org/t/p/w500/4Jee6i1Zz9uZ6gG8H9l9bBzY0Tg.jpg",
+    "sutradara": {
+      "nama": "Ron Clements",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 107,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Disney",
+      "budget": "150M USD"
+    }
+  },
+
+  {
+    "id": 19,
+    "judul": "Fast & Furious 7",
+    "tahun": 2015,
+    "genre": "Action",
+    "rating": 7.1,
+    "gambar": "https://image.tmdb.org/t/p/w500/dCgm7efXDmiABSdWDHBDBx2jwmn.jpg",
+    "sutradara": {
+      "nama": "James Wan",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 137,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Universal",
+      "budget": "190M USD"
+    }
+  },
+
+  {
+    "id": 20,
+    "judul": "Aladdin",
+    "tahun": 2019,
+    "genre": "Fantasy",
+    "rating": 7.0,
+    "gambar": "https://image.tmdb.org/t/p/w500/3iYQTLGoy7QnjcUYRJy4YrAgGvp.jpg",
+    "sutradara": {
+      "nama": "Guy Ritchie",
+      "negara": "USA"
+    },
+    "detail": {
+      "durasi": 128,
+      "bahasa": "English",
+      "status": "Released"
+    },
+    "produksi": {
+      "studio": "Disney",
+      "budget": "183M USD"
+    }
+  }
+]

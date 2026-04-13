@@ -22,7 +22,7 @@ const FormInput = ({ label, name, type, value, onChange, placeholder, error, req
       />
       {error && (
         <div className="text-rose-400 text-xs mt-1 font-light tracking-wide">
-          {error}
+          {error}   
         </div>
       )}
     </div>
