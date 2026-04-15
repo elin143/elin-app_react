@@ -24,10 +24,10 @@ return (
     {/* HEADER */}
     <div className="text-center mb-8">
       <h1 className="text-4xl font-bold text-purple-400">
-        🎬 Film Diary
+        🎬 Film 
       </h1>
       <p className="text-gray-500 mt-1">
-        koleksi film favoritmu 💕
+        koleksi film favoritmu 
       </p>
     </div>
 
