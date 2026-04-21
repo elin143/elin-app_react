@@ -1,10 +1,16 @@
 import { FaHome, FaClipboardList, FaFileAlt } from "react-icons/fa";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const [active, setActive] = useState("dashboard");
-
+      const menuClass = ({ isActive }) =>
+        `flex cursor-pointer items-center rounded-xl p-4  space-x-2
+        ${isActive ? 
+            "text-hijau bg-green-200 font-extrabold" : 
+            "text-gray-600 hover:text-hijau hover:bg-green-200 hover:font-extrabold"
+        }`
   return (
+    
     <div className="w-64 bg-white min-h-screen shadow p-4">
 
       {/* LOGO */}
@@ -18,37 +24,34 @@ const Sidebar = () => {
       {/* MENU */}
       <ul className="space-y-4">
         
-        <li
+        <li>
+          <NavLink
           onClick={() => setActive("dashboard")}
-          className={`flex items-center gap-2 cursor-pointer ${
-            active === "dashboard"
-              ? "text-green-500 font-semibold"
-              : "text-gray-500"
-          }`}
+          to="/"
+          className={menuClass}
         >
           <FaHome /> Dashboard
+          </NavLink>
         </li>
 
-        <li
+        <li>
+          <NavLink
           onClick={() => setActive("order")}
-          className={`flex items-center gap-2 cursor-pointer ${
-            active === "order"
-              ? "text-green-500 font-semibold"
-              : "text-gray-500"
-          }`}
+          to="/orders"
+          className={menuClass}
         >
-          <FaClipboardList /> Order 
+          <FaClipboardList /> Order List
+          </NavLink>
         </li>
 
-        <li
+        <li>
+          <NavLink
           onClick={() => setActive("detail")}
-          className={`flex items-center gap-2 cursor-pointer ${
-            active === "detail"
-              ? "text-green-500 font-semibold"
-              : "text-gray-500"
-          }`}
+          to="/customers"
+          className={menuClass}
         >
           <FaFileAlt /> Customer
+          </NavLink>
         </li>
 
       </ul>
@@ -59,7 +62,7 @@ const Sidebar = () => {
           Please organize your menus through button below!
         </p>
         <button className="bg-white text-green-500 px-3 py-1 rounded">
-          + Add Menus
+          + Add Menu
         </button>
       </div>
 
