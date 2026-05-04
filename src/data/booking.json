@@ -1,0 +1,272 @@
+[
+  {
+    "bookingId": "BK-001",
+    "patientName": "Andi Saputra",
+    "treatmentType": "Brightening Facial",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-01 09:00",
+    "status": "Scheduled",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-002",
+    "patientName": "Budi Santoso",
+    "treatmentType": "Acne Treatment",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-02 10:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-003",
+    "patientName": "Citra Lestari",
+    "treatmentType": "Laser Rejuvenation",
+    "therapistDoctor": "Dr. Kevin Hartono",
+    "dateTime": "2026-04-03 11:00",
+    "status": "Cancelled",
+    "paymentStatus": "Refunded"
+  },
+  {
+    "bookingId": "BK-004",
+    "patientName": "Dewi Anggraini",
+    "treatmentType": "Hydrafacial",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-04 13:00",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-005",
+    "patientName": "Eko Prasetyo",
+    "treatmentType": "Botox Injection",
+    "therapistDoctor": "Dr. Rizky Ananda",
+    "dateTime": "2026-04-05 14:30",
+    "status": "Scheduled",
+    "paymentStatus": "Pending"
+  },
+  {
+    "bookingId": "BK-006",
+    "patientName": "Fajar Nugroho",
+    "treatmentType": "Chemical Peeling",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-06 15:00",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-007",
+    "patientName": "Gita Permata",
+    "treatmentType": "Skin Booster",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-07 16:00",
+    "status": "Rescheduled",
+    "paymentStatus": "Pending"
+  },
+  {
+    "bookingId": "BK-008",
+    "patientName": "Hendra Wijaya",
+    "treatmentType": "Microneedling",
+    "therapistDoctor": "Dr. Kevin Hartono",
+    "dateTime": "2026-04-08 09:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-009",
+    "patientName": "Intan Sari",
+    "treatmentType": "Whitening Injection",
+    "therapistDoctor": "Dr. Rizky Ananda",
+    "dateTime": "2026-04-09 10:00",
+    "status": "Scheduled",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-010",
+    "patientName": "Joko Susilo",
+    "treatmentType": "Anti Aging Facial",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-10 11:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-011",
+    "patientName": "Kartika Dewi",
+    "treatmentType": "PRP Facial",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-11 13:30",
+    "status": "Scheduled",
+    "paymentStatus": "Pending"
+  },
+  {
+    "bookingId": "BK-012",
+    "patientName": "Lukman Hakim",
+    "treatmentType": "Scar Removal Laser",
+    "therapistDoctor": "Dr. Kevin Hartono",
+    "dateTime": "2026-04-12 14:00",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-013",
+    "patientName": "Maya Putri",
+    "treatmentType": "Facial Detox",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-13 15:30",
+    "status": "Cancelled",
+    "paymentStatus": "Refunded"
+  },
+  {
+    "bookingId": "BK-014",
+    "patientName": "Nanda Pratama",
+    "treatmentType": "Jawline Filler",
+    "therapistDoctor": "Dr. Rizky Ananda",
+    "dateTime": "2026-04-14 16:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-015",
+    "patientName": "Oka Mahendra",
+    "treatmentType": "Glowing Facial",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-15 09:00",
+    "status": "Scheduled",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-016",
+    "patientName": "Putri Ayu",
+    "treatmentType": "Nose Thread Lift",
+    "therapistDoctor": "Dr. Kevin Hartono",
+    "dateTime": "2026-04-16 10:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-017",
+    "patientName": "Qori Ahmad",
+    "treatmentType": "Acne Scar Laser",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-17 11:00",
+    "status": "Rescheduled",
+    "paymentStatus": "Pending"
+  },
+  {
+    "bookingId": "BK-018",
+    "patientName": "Rina Kurnia",
+    "treatmentType": "Premium Hydrafacial",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-18 13:00",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-019",
+    "patientName": "Sandi Prakoso",
+    "treatmentType": "Botox Forehead",
+    "therapistDoctor": "Dr. Rizky Ananda",
+    "dateTime": "2026-04-19 14:30",
+    "status": "Scheduled",
+    "paymentStatus": "Pending"
+  },
+  {
+    "bookingId": "BK-020",
+    "patientName": "Tina Melati",
+    "treatmentType": "Skin Tightening",
+    "therapistDoctor": "Dr. Kevin Hartono",
+    "dateTime": "2026-04-20 15:00",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-021",
+    "patientName": "Umar Faruq",
+    "treatmentType": "Facial Brightening",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-21 16:00",
+    "status": "Scheduled",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-022",
+    "patientName": "Vina Oktaviani",
+    "treatmentType": "Lip Filler",
+    "therapistDoctor": "Dr. Rizky Ananda",
+    "dateTime": "2026-04-22 09:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-023",
+    "patientName": "Wawan Setiawan",
+    "treatmentType": "Chemical Peel Deluxe",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-23 10:00",
+    "status": "Cancelled",
+    "paymentStatus": "Refunded"
+  },
+  {
+    "bookingId": "BK-024",
+    "patientName": "Xenia Putri",
+    "treatmentType": "Glass Skin Facial",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-24 11:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-025",
+    "patientName": "Yudi Kurniawan",
+    "treatmentType": "Thread Lift",
+    "therapistDoctor": "Dr. Kevin Hartono",
+    "dateTime": "2026-04-25 13:30",
+    "status": "Scheduled",
+    "paymentStatus": "Pending"
+  },
+  {
+    "bookingId": "BK-026",
+    "patientName": "Zahra Nabila",
+    "treatmentType": "Premium Skin Booster",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-26 14:00",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-027",
+    "patientName": "Agus Salim",
+    "treatmentType": "Acne Facial",
+    "therapistDoctor": "Dr. Citra Maharani",
+    "dateTime": "2026-04-27 15:30",
+    "status": "Rescheduled",
+    "paymentStatus": "Pending"
+  },
+  {
+    "bookingId": "BK-028",
+    "patientName": "Bella Safitri",
+    "treatmentType": "Luxury Hydrafacial",
+    "therapistDoctor": "Dr. Amanda Putri",
+    "dateTime": "2026-04-28 16:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-029",
+    "patientName": "Cahyo Nugraha",
+    "treatmentType": "Laser Whitening",
+    "therapistDoctor": "Dr. Rizky Ananda",
+    "dateTime": "2026-04-29 09:00",
+    "status": "Scheduled",
+    "paymentStatus": "Paid"
+  },
+  {
+    "bookingId": "BK-030",
+    "patientName": "Dina Maharani",
+    "treatmentType": "Ultimate Anti Aging",
+    "therapistDoctor": "Dr. Kevin Hartono",
+    "dateTime": "2026-04-30 10:30",
+    "status": "Completed",
+    "paymentStatus": "Paid"
+  }
+]

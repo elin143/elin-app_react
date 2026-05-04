@@ -1,42 +1,43 @@
-import { useState } from "react";
-import Dashboard from "./pages/Dashboard";
+import React, { Suspense, useState } from "react";
 import "./assets/tailwind.css";
-import Sidebar from "./layouts/Sidebar";
-import Header from "./layouts/Header";
 import { Routes, Route } from "react-router-dom";
-import Customers from "./pages/Customer";
-import Orders from "./pages/Orders";
-import NotFound from "./pages/NotFound";
+import Loading from "./components/Loading";
 
 function App() {
-  // const [count, setCount] = useState(0);
-
+  const Dashboard = React.lazy(() => import("./pages/Dashboard"))
+  const Booking = React.lazy(() => import("./pages/Booking"))
+  const Pasien = React.lazy(() => import("./pages/Pasien"))
+  const NotFound = React.lazy(() => import("./pages/NotFound"))
+  const Login = React.lazy(() => import("./pages/auth/Login"))
+  const Register = React.lazy(() => import("./pages/auth/Register"))
+  const Forgot = React.lazy(() => import("./pages/auth/Forgot"))
+  const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"))
+  const Error401 = React.lazy(() => import("./pages/Error401"))
+  const Error400 = React.lazy(() => import("./pages/Error400"))
+  const Error403 = React.lazy(() => import("./pages/Error403"))
+  const MainLayout = React.lazy(() => import("./layouts/MainLayout"))
   return (
- 
-    <div className="flex min-h-screen bg-gray-100">
-      
-      {/* SIDEBAR */}
-      <Sidebar />
+      <Suspense fallback={<Loading/>}>
+        <Routes>
+          <Route element={<MainLayout/>}>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/pasien" element={<Pasien />} />
+          <Route path="/error-400" element={<Error400 />} />
+          <Route path="/error-401" element={<Error401 />} />
+          <Route path="/error-403" element={<Error403 />} />
+          </Route>
 
-      {/* CONTENT */}
-      <div className="flex-1 flex flex-col">
-        
-        <Header />
-
-
-        <div className="p-6">
-          <Routes>
-              <Route path="*" element={<NotFound />} />
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/customers" element={<Customers />} />
-            </Routes>
-        </div>
-
-      </div>
-      </div>
-
+          <Route element={<AuthLayout/>}>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/forgot" element={<Forgot/>}/>
+          </Route>
+        </Routes>
+        </Suspense>
   );
 }
+
 
 export default App;

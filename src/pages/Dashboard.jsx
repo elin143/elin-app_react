@@ -1,5 +1,5 @@
-import Sidebar from "../layouts/Sidebar";
-import Header from "../layouts/Header";
+import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 import PageHeader from "../components/PageHeader";
 
 import {
@@ -23,9 +23,9 @@ import {
 const Dashboard = () => {
   // DATA
   const pieData = [
-    { name: "Total Order", value: 81 },
-    { name: "Customer Growth", value: 22 },
-    { name: "Total Revenue", value: 62 },
+    { name: "Facial Treatment", value: 81 },
+    { name: "Skin Consultation", value: 22 },
+    { name: "Beauty Revenue", value: 62 },
   ];
 
   const lineData = [
@@ -38,10 +38,10 @@ const Dashboard = () => {
     { name: "Saturday", value: 400 },
   ];
 
-  const COLORS = ["#f2acc3", "#b4f0af", "#9fd5f5"];
+  const COLORS = ["#f9c5d5", "#fbcfe8", "#f8b4d9"];
 
   return (
-    <div className="flex bg-gray-100 min-h-screen">
+    <div className="flex bg-pink-50 min-h-screen">
       {/* <Sidebar /> */}
 
       <div className="flex-1">
@@ -53,55 +53,54 @@ const Dashboard = () => {
           {/* CARDS */}
           <div className="grid grid-cols-5 gap-4 mt-6">
 
-            <div className="bg-white p-4 rounded-lg shadow flex items-center gap-4">
-              <div className="bg-green-100 p-3 rounded-full">
-                <FaShoppingCart className="text-green-500" />
+            <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4 border border-pink-100">
+              <div className="bg-pink-100 p-3 rounded-full">
+                <FaShoppingCart className="text-pink-400" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">300</h2>
-                <p className="text-gray-400 text-sm">Total Orders</p>
+                <h2 className="font-bold text-lg text-pink-500">300</h2>
+                <p className="text-pink-300 text-sm">Beauty Orders</p>
               </div>
             </div>
 
-            <div className="bg-white p-4 rounded-lg shadow flex items-center gap-4">
-              <div className="bg-blue-100 p-3 rounded-full">
-                <FaTruck className="text-blue-500" />
+            <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4 border border-pink-100">
+              <div className="bg-rose-100 p-3 rounded-full">
+                <FaTruck className="text-rose-400" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">196</h2>
-                <p className="text-gray-400 text-sm">Total Delivered</p>
+                <h2 className="font-bold text-lg text-rose-500">196</h2>
+                <p className="text-pink-300 text-sm">Treatment Completed</p>
               </div>
             </div>
 
-            <div className="bg-white p-4 rounded-lg shadow flex items-center gap-4">
-              <div className="bg-red-100 p-3 rounded-full">
-                <FaTimesCircle className="text-red-500" />
+            <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4 border border-pink-100">
+              <div className="bg-pink-100 p-3 rounded-full">
+                <FaTimesCircle className="text-pink-300" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">50</h2>
-                <p className="text-gray-400 text-sm">Total Canceled</p>
+                <h2 className="font-bold text-lg text-pink-400">50</h2>
+                <p className="text-pink-300 text-sm">Canceled Booking</p>
               </div>
             </div>
 
-            <div className="bg-white p-4 rounded-lg shadow flex items-center gap-4">
-              <div className="bg-yellow-100 p-3 rounded-full">
-                <FaDollarSign className="text-yellow-500" />
+            <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4 border border-pink-100">
+              <div className="bg-rose-100 p-3 rounded-full">
+                <FaDollarSign className="text-rose-400" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">Rp.140</h2>
-                <p className="text-gray-400 text-sm">Total Revenue</p>
+                <h2 className="font-bold text-lg text-rose-500">Rp.140</h2>
+                <p className="text-pink-300 text-sm">Clinic Revenue</p>
               </div>
             </div>
 
             {/* IMPROVISASI */}
-            <div className="bg-white p-4 rounded-lg shadow flex items-center gap-4">
-              <div className="bg-purple-100 p-3 rounded-full">
-                <FaUsers className="text-blue
-                -500" />
+            <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4 border border-pink-100">
+              <div className="bg-pink-100 p-3 rounded-full">
+                <FaUsers className="text-pink-400" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">320</h2>
-                <p className="text-gray-400 text-sm">Total Customers</p>
+                <h2 className="font-bold text-lg text-pink-500">320</h2>
+                <p className="text-pink-300 text-sm">Beauty Patients</p>
               </div>
             </div>
 
@@ -111,8 +110,8 @@ const Dashboard = () => {
           <div className="grid grid-cols-2 gap-6 mt-6">
 
             {/* PIE CHART */}
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h2 className="font-semibold mb-4">Pie Chart</h2>
+            <div className="bg-white p-4 rounded-lg shadow-md border border-pink-100">
+              <h2 className="font-semibold mb-4 text-pink-500">Beauty Service Chart</h2>
 
               <div className="flex justify-around">
 
@@ -127,10 +126,10 @@ const Dashboard = () => {
                         fill={COLORS[index]}
                       />
                     </PieChart>
-                    <p className="text-sm mt-2 font-semibold">
+                    <p className="text-sm mt-2 font-semibold text-pink-500">
                       {entry.value}%
                     </p>
-                    <p className="text-gray-400 text-xs">
+                    <p className="text-pink-300 text-xs">
                       {entry.name}
                     </p>
                   </div>
@@ -140,17 +139,17 @@ const Dashboard = () => {
             </div>
 
             {/* LINE CHART */}
-            <div className="bg-white p-4 rounded-lg shadow">
+            <div className="bg-white p-4 rounded-lg shadow-md border border-pink-100">
               
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <h2 className="font-semibold">Chart Order</h2>
-                  <p className="text-gray-400 text-xs">
-                    Lorem ipsum dolor sit amet
+                  <h2 className="font-semibold text-pink-500">Patient Visit Trend</h2>
+                  <p className="text-pink-300 text-xs">
+                    Weekly beauty clinic performance
                   </p>
                 </div>
 
-                <button className="border px-3 py-1 rounded text-blue-500">
+                <button className="border border-pink-200 px-3 py-1 rounded text-pink-400 hover:bg-pink-50">
                   Save Report
                 </button>
               </div>
@@ -162,7 +161,7 @@ const Dashboard = () => {
                   <Line
                     type="monotone"
                     dataKey="value"
-                    stroke="#3b82f6"
+                    stroke="#f9a8d4"
                     strokeWidth={3}
                   />
                 </LineChart>
