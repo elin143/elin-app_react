@@ -16,7 +16,7 @@ const Sidebar = () => {
 
       {/* LOGO */}
       <div className="mb-8 text-center border-b border-pink-100 pb-6">
-        <h1 className="text-4xl font-extrabold tracking-wide text-pink-400 font-serif italic drop-shadow-sm">
+        <h1 className="text-4xl font-extrabold tracking-wide text-black-400 font-serif italic drop-shadow-sm">
           Beauty<span className="text-rose-300">.</span>
         </h1>
         <p className="text-pink-300 text-sm mt-2 font-light tracking-wide">

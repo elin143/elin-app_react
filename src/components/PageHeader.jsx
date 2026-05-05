@@ -1,10 +1,25 @@
-const PageHeader = () => {
+const PageHeader = ({
+  title = "Dashboard",
+  breadcrumb = "Home / Home Detail / Home Very Detail",
+  children,
+}) => {
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-      <p className="text-gray-400 text-sm">
-        Home / Home Detail / Home Very Detail
-      </p>
+    <div className="mb-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold">{title}</h1>
+
+          {/* Breadcrumb */}
+          <p className="text-sm text-gray-400">
+            {Array.isArray(breadcrumb)
+              ? breadcrumb.join(" / ")
+              : breadcrumb}
+          </p>
+        </div>
+
+        {/* Action */}
+        {children && <div>{children}</div>}
+      </div>
     </div>
   );
 };
