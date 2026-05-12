@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
-import customer from "../data/pasien.json";
+import pasien from "../data/pasien.json";
 
 export default function Pasien(){
     return (
@@ -57,65 +58,69 @@ export default function Pasien(){
       </thead>
 
       <tbody className="bg-white/50">
-        {customer.map((c) => (
-          <tr 
-            key={c.patientId} 
-            className="text-center border-b border-pink-50 last:border-none hover:bg-pink-50/60 transition-all duration-300"
-          >
-            <td className="p-4 text-pink-300 font-bold text-sm">
-              <span className="bg-pink-100 px-3 py-1 rounded-xl text-[11px] shadow-sm">
-                #{c.patientId}
-              </span>
-            </td>
+  {pasien.map((pasien) => (
+    <tr
+      key={pasien.patientId}
+      className="text-center border-b border-pink-50 last:border-none hover:bg-pink-50/60 transition-all duration-300"
+    >
+      <td className="p-4 text-pink-300 font-bold text-sm">
+        <span className="bg-pink-100 px-3 py-1 rounded-xl text-[11px] shadow-sm">
+          #{pasien.patientId}
+        </span>
+      </td>
 
-            <td className="p-4 text-gray-600 font-bold text-sm">
-              {c.name}
-            </td>
+      <td className="p-4 text-gray-600 font-bold text-sm">
+        <Link to={`/pasien/${pasien.patientId}`} className="text-emerald-400 hover:text-emerald-500">
+        {pasien.name}
+    </Link> 
+      </td>
 
-            <td className="p-4 text-gray-500 text-sm">
-              {c.age}
-            </td>
+      <td className="p-4 text-gray-500 text-sm">
+        {pasien.age}
+      </td>
 
-            <td className="p-4 text-gray-500 text-sm">
-              {c.gender}
-            </td>
+      <td className="p-4 text-gray-500 text-sm">
+        {pasien.gender}
+      </td>
 
-            <td className="p-4 text-pink-300 text-sm">
-              {c.phone}
-            </td>
+      <td className="p-4 text-pink-300 text-sm">
+        {pasien.phone}
+      </td>
 
-            <td className="p-4 text-rose-300 text-sm">
-              {c.email}
-            </td>
+      <td className="p-4 text-rose-300 text-sm">
+        {pasien.email}
+      </td>
 
-            <td className="p-4 text-gray-600 text-sm font-medium">
-              {c.treatmentHistory}
-            </td>
+      <td className="p-4 text-gray-600 text-sm font-medium">
+        {pasien.treatmentHistory}
+      </td>
 
-            <td className="p-4 text-gray-500 text-sm italic">
-              {c.allergiesSkinType}
-            </td>
+      <td className="p-4 text-gray-500 text-sm italic">
+        {pasien.allergiesSkinType}
+      </td>
 
-            <td className="p-4">
-              <span className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm ${
-                c.membershipStatus === "Platinum"
-                  ? "bg-purple-100 text-purple-400"
-                  : c.membershipStatus === "Gold"
-                  ? "bg-yellow-100 text-yellow-500"
-                  : c.membershipStatus === "Silver"
-                  ? "bg-gray-200 text-gray-500"
-                  : "bg-pink-100 text-pink-400"
-              }`}>
-                {c.membershipStatus}
-              </span>
-            </td>
+      <td className="p-4">
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm ${
+            pasien.membershipStatus === "Platinum"
+              ? "bg-purple-100 text-purple-400"
+              : pasien.membershipStatus === "Gold"
+              ? "bg-yellow-100 text-yellow-500"
+              : pasien.membershipStatus === "Silver"
+              ? "bg-gray-200 text-gray-500"
+              : "bg-pink-100 text-pink-400"
+          }`}
+        >
+          {pasien.membershipStatus}
+        </span>
+      </td>
 
-            <td className="p-4 text-pink-300 text-sm italic">
-              {c.lastVisit}
-            </td>
-          </tr>
-        ))}
-      </tbody>
+      <td className="p-4 text-pink-300 text-sm italic">
+        {pasien.lastVisit}
+      </td>
+    </tr>
+  ))}
+</tbody>
     </table>
   </div>
 </div>

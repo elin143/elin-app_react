@@ -7,6 +7,8 @@ function App() {
   const Dashboard = React.lazy(() => import("./pages/Dashboard"))
   const Booking = React.lazy(() => import("./pages/Booking"))
   const Pasien = React.lazy(() => import("./pages/Pasien"))
+  const PasienDetail = React.lazy(() => import("./pages/PasienDetail"))
+  const BookingDetail = React.lazy(() => import("./pages/BookingDetail"))
   const NotFound = React.lazy(() => import("./pages/NotFound"))
   const Login = React.lazy(() => import("./pages/auth/Login"))
   const Register = React.lazy(() => import("./pages/auth/Register"))
@@ -27,6 +29,8 @@ function App() {
           <Route path="/error-400" element={<Error400 />} />
           <Route path="/error-401" element={<Error401 />} />
           <Route path="/error-403" element={<Error403 />} />
+          <Route path="/Pasien/:id" element={<PasienDetail />} />
+          <Route path="/Booking/:id" element={<BookingDetail/>} />
           </Route>
 
           <Route element={<AuthLayout/>}>
