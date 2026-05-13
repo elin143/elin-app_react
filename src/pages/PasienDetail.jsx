@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import pasienData from "../data/pasien.json"
+import pasien from "../data/pasien.json"
 
 export default function PasienDetail() {
     const { id } = useParams()

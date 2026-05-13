@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
-import orders from "../data/booking.json";
+import booking from "../data/booking.json";
 
 export default function Booking() {
     return (
@@ -10,7 +11,7 @@ export default function Booking() {
     title={
       <div className="space-y-2">
         <h1 className="text-4xl font-black text-pink-400 tracking-tight font-serif italic">
-          Appointment List
+          Booking List
         </h1>
         <div className="h-1.5 w-16 bg-gradient-to-r from-pink-200 to-rose-300 rounded-full" />
       </div>
@@ -19,7 +20,7 @@ export default function Booking() {
       <nav className="flex items-center space-x-3 text-xs font-bold uppercase tracking-widest">
         <span className="text-pink-300 hover:text-pink-400 transition-colors cursor-pointer">Home</span>
         <div className="w-1 h-1 rounded-full bg-pink-200" />
-        <span className="text-rose-200">Appointments</span>
+        <span className="text-rose-200">Booking</span>
       </nav>
     }
   >
@@ -27,7 +28,7 @@ export default function Booking() {
       <span className="mr-2 text-xl opacity-70 group-hover:rotate-12 transition-transform">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
       </span>
-      Add Appointment
+      Booking
     </button>
   </PageHeader>
 </div>
@@ -35,7 +36,7 @@ export default function Booking() {
 <div className="bg-gradient-to-br from-white via-pink-50 to-rose-50 p-8 rounded-[2.5rem] border-4 border-pink-100 shadow-md mt-6">
   {/* PageHeader tetap sinkron dengan tema */}
   <PageHeader 
-    title={<h1 className="text-3xl font-black text-pink-400 tracking-tight font-serif italic">Appointment List</h1>} 
+    title={<h1 className="text-3xl font-black text-pink-400 tracking-tight font-serif italic">Booking List</h1>} 
     breadcrumb={["Home", "Appointments"]} 
   />
 
@@ -54,48 +55,50 @@ export default function Booking() {
       </thead>
 
       <tbody>
-        {orders.map((order) => (
+        {booking.map((booking) => (
           <tr 
-            key={order.bookingId} 
+            key={booking.bookingId} 
             className="text-center border-b border-pink-50 last:border-none hover:bg-pink-50/60 transition-all duration-300 group"
           >
             <td className="p-5 text-pink-300 font-medium text-sm">
               <span className="bg-pink-100 px-3 py-1 rounded-xl text-[11px] font-bold shadow-sm">
-                #{order.bookingId}
+                #{booking.bookingId}
               </span>
             </td>
 
             <td className="p-5 text-gray-600 font-bold text-sm">
-              {order.patientName}
+              <Link to={`/booking/${booking.bookingId}`} className="text-emerald-400 hover:text-emerald-500">
+        {booking.patientName}
+    </Link> 
             </td>
 
             <td className="p-5 text-rose-400 font-semibold text-sm">
-              {order.treatmentType}
+              {booking.treatmentType}
             </td>
 
             <td className="p-5 text-gray-500 font-medium text-sm">
-              {order.therapistDoctor}
+              {booking.therapistDoctor}
             </td>
 
             <td className="p-5 text-pink-300 text-xs font-medium italic">
-              {order.dateTime}
+              {booking.dateTime}
             </td>
 
             <td className="p-5">
               <span className="bg-gradient-to-r from-pink-100 to-rose-100 text-pink-400 px-4 py-1 rounded-full text-[11px] font-black uppercase tracking-wider shadow-sm">
-                {order.status}
+                {booking.status}
               </span>
             </td>
 
             <td className="p-5">
               <span className={`px-4 py-1 rounded-full text-[11px] font-black uppercase tracking-wider shadow-sm ${
-                order.paymentStatus === "Paid"
+                booking.paymentStatus === "Paid"
                   ? "bg-green-100 text-green-500"
-                  : order.paymentStatus === "Pending"
+                  : booking.paymentStatus === "Pending"
                   ? "bg-yellow-100 text-yellow-500"
                   : "bg-red-100 text-red-400"
               }`}>
-                {order.paymentStatus}
+                {booking.paymentStatus}
               </span>
             </td>
 

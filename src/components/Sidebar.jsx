@@ -43,7 +43,7 @@ const Sidebar = () => {
           to="/Booking"
           className={menuClass}
         >
-          <FaClipboardList className="text-lg" /> <span>Treatment List</span>
+          <FaClipboardList className="text-lg" /> <span>Booking</span>
           </NavLink>
         </li>
 
