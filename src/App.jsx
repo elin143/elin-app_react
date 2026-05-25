@@ -18,6 +18,7 @@ function App() {
   const Error400 = React.lazy(() => import("./pages/Error400"))
   const Error403 = React.lazy(() => import("./pages/Error403"))
   const MainLayout = React.lazy(() => import("./layouts/MainLayout"))
+  const Components = React.lazy(() => import("./pages/Components"))
   return (
       <Suspense fallback={<Loading/>}>
         <Routes>
@@ -31,6 +32,7 @@ function App() {
           <Route path="/error-403" element={<Error403 />} />
           <Route path="/Pasien/:id" element={<PasienDetail />} />
           <Route path="/Booking/:id" element={<BookingDetail/>} />
+          <Route path="/Components" element={<Components />} />
           </Route>
 
           <Route element={<AuthLayout/>}>

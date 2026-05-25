@@ -57,6 +57,16 @@ const Sidebar = () => {
           </NavLink>
         </li>
 
+        <li>
+          <NavLink
+          onClick={() => setActive("Components")}
+          to="/Components"
+          className={menuClass}
+        >
+          <FaFileAlt className="text-lg" /> <span>Components</span>
+          </NavLink>
+        </li>
+
       </ul>
 
       <div className="mt-10">
