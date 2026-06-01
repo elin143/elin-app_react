@@ -6,19 +6,6 @@ import {
   FaShoppingCart,
   FaTruck,
   FaTimesCircle,
-  FaDollarSign,
-  FaUsers,
-} from "react-icons/fa";
-
-import {
-  PieChart,
-  Pie,
-  LineChart,
-  Line,
-  XAxis,
-  Tooltip,
-  ResponsiveContainer,
-  RadialBarChart,
   RadialBar,
   PolarAngleAxis,
 } from "recharts";
