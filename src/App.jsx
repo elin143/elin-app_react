@@ -2,6 +2,7 @@ import React, { Suspense, useState } from "react";
 import "./assets/tailwind.css";
 import { Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
+import CustomerSegmen from "./pages/CustomerSegmen";
 
 function App() {
   const Dashboard = React.lazy(() => import("./pages/Dashboard"))
@@ -19,6 +20,7 @@ function App() {
   const Error403 = React.lazy(() => import("./pages/Error403"))
   const MainLayout = React.lazy(() => import("./layouts/MainLayout"))
   const Components = React.lazy(() => import("./pages/Components"))
+  const CustomerSegmen = React.lazy(() => import("./pages/CustomerSegmen"))
   return (
       <Suspense fallback={<Loading/>}>
         <Routes>
@@ -33,6 +35,7 @@ function App() {
           <Route path="/Pasien/:id" element={<PasienDetail />} />
           <Route path="/Booking/:id" element={<BookingDetail/>} />
           <Route path="/Components" element={<Components />} />
+          <Route path="/CustomerSegmen" element={<CustomerSegmen />} />
           </Route>
 
           <Route element={<AuthLayout/>}>

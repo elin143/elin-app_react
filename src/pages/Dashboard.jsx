@@ -2,13 +2,11 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import PageHeader from "../components/PageHeader";
 
-import {
-  FaShoppingCart,
-  FaTruck,
-  FaTimesCircle,
-  RadialBar,
-  PolarAngleAxis,
+import { 
+  ResponsiveContainer, RadialBarChart, RadialBar, PolarAngleAxis, PieChart, Pie, Cell,
+  LineChart, Line, XAxis, YAxis, Tooltip 
 } from "recharts";
+import { FaShoppingCart, FaTruck, FaTimesCircle, FaDollarSign, FaUsers } from "react-icons/fa";
 
 const Dashboard = () => {
   // DATA
