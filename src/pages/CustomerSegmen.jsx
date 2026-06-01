@@ -270,12 +270,13 @@ export default function CustomerSegmen() {
     },
 ];
 
-    const filteredData =
-        filter === "all"
-            ? data
-            : data.filter((item) =>
-                  item.segment.toLowerCase().includes(filter)
-              );
+const filteredData =
+    filter === "all"
+        ? data
+        : data.filter((item) => {
+              const segmentKey = item.segment.replace(" Customer", "").toLowerCase();
+              return segmentKey === filter;
+          });
 
     return (
         <div className="space-y-6">
