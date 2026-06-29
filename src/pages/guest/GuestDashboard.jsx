@@ -552,7 +552,7 @@ const GuestDashboard = () => {
       </nav>
 
       {/* HERO */}
-      <section id="home" className="section-hidden px-6 md:px-14 pt-12 pb-20 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center" style={{ background: `linear-gradient(135deg, ${BG} 0%, ${BG_ALT} 100%)` }}>
+      <section id="home" className="section-hidden px-6 md:px-14 pt-10 pb-14 max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center" style={{ background: `linear-gradient(135deg, ${BG} 0%, ${BG_ALT} 100%)` }}>
         <div>
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-4" style={{ color: SAGE }}>
             Klinik kecantikan & dermatologi
@@ -601,16 +601,16 @@ const GuestDashboard = () => {
       </section>
 
       {/* TENTANG KAMI */}
-      <section id="about" className="section-hidden px-6 md:px-14 py-16" style={{ background: BG }}>
+      <section id="about" className="section-hidden px-6 md:px-14 py-10" style={{ background: BG }}>
         <div className="max-w-7xl mx-auto">
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
             Tentang Kami
           </p>
-          <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+          <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
             Mengenal BeautyCare Clinic
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="grid md:grid-cols-2 gap-6 items-start">
             <div className="space-y-4">
               <p className="text-stone-600 text-sm md:text-base leading-relaxed">
                 BeautyCare Clinic adalah klinik kecantikan dan dermatologi modern yang berdedikasi untuk memberikan perawatan kulit terbaik dengan pendekatan ilmiah dan personal. Sejak berdiri, kami telah melayani ribuan pasien dengan standar medis tertinggi.
@@ -639,12 +639,12 @@ const GuestDashboard = () => {
         </div>
       </section>
       {/* KEUNGGULAN */}
-      <section id="advantages" className="section-hidden px-6 md:px-14 py-16" style={{ background: BG_ALT }}>
+      <section id="advantages" className="section-hidden px-6 md:px-14 py-10" style={{ background: BG_ALT }}>
         <div className="max-w-7xl mx-auto">
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
             Keunggulan
           </p>
-          <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+          <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
             Mengapa memilih BeautyCare?
           </h2>
 
@@ -669,11 +669,11 @@ const GuestDashboard = () => {
       </section>
 
       {/* STATS */}
-      <section id="stats" ref={statsRef} className="section-hidden px-6 md:px-14 py-16 max-w-7xl mx-auto">
+      <section id="stats" ref={statsRef} className="section-hidden px-6 md:px-14 py-10 max-w-7xl mx-auto">
         <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
           Angka berbicara
         </p>
-        <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+        <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
           Dipercaya ribuan pasien
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -695,12 +695,12 @@ const GuestDashboard = () => {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="section-hidden px-6 md:px-14 py-16" style={{ background: BG_ALT }}>
+      <section id="services" className="section-hidden px-6 md:px-14 py-10" style={{ background: BG_ALT }}>
         <div className="max-w-7xl mx-auto">
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
             Layanan unggulan
           </p>
-          <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+          <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
             Perawatan unggulan kami
           </h2>
 
@@ -713,11 +713,11 @@ const GuestDashboard = () => {
       </section>
 
       {/* PRODUK */}
-      <section id="products" className="section-hidden px-6 md:px-14 py-16 max-w-7xl mx-auto">
+      <section id="products" className="section-hidden px-6 md:px-14 py-10 max-w-7xl mx-auto">
         <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
           Produk
         </p>
-        <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+        <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
           Skincare pilihan dokter kami
         </h2>
 
@@ -768,11 +768,11 @@ const GuestDashboard = () => {
       </section>
 
       {/* DOCTORS */}
-      <section id="doctors" className="section-hidden px-6 md:px-14 py-16" style={{ background: BG_ALT }}>
+      <section id="doctors" className="section-hidden px-6 md:px-14 py-10" style={{ background: BG_ALT }}>
         <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
           Tim kami
         </p>
-        <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+        <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
           Dokter spesialis terpercaya
         </h2>
 
@@ -784,12 +784,12 @@ const GuestDashboard = () => {
       </section>
 
       {/* TESTIMONIALS — CAROUSEL */}
-      <section id="testimonials" className="section-hidden px-6 md:px-14 py-16">
+      <section id="testimonials" className="section-hidden px-6 md:px-14 py-10">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
             Testimoni
           </p>
-          <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+          <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
             Cerita dari pasien kami
           </h2>
 
@@ -856,12 +856,12 @@ const GuestDashboard = () => {
       </section>
 
       {/* PROMO */}
-      <section id="promo" className="section-hidden px-6 md:px-14 py-16" style={{ background: BG_ALT }}>
+      <section id="promo" className="section-hidden px-6 md:px-14 py-10" style={{ background: BG_ALT }}>
         <div className="max-w-7xl mx-auto">
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
             Promo
           </p>
-          <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+          <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
             Penawaran spesial untukmu
           </h2>
 
@@ -902,7 +902,7 @@ const GuestDashboard = () => {
       </section>
 
       {/* NEWSLETTER */}
-      <section id="newsletter" className="section-hidden px-6 md:px-14 py-16" style={{ background: BG_ALT }}>
+      <section id="newsletter" className="section-hidden px-6 md:px-14 py-10" style={{ background: BG_ALT }}>
         <div className="max-w-lg mx-auto text-center">
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
             Newsletter
@@ -953,12 +953,12 @@ const GuestDashboard = () => {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="section-hidden px-6 md:px-14 py-16">
+      <section id="faq" className="section-hidden px-6 md:px-14 py-10">
         <div className="max-w-3xl mx-auto">
           <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
             FAQ
           </p>
-          <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+          <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
             Pertanyaan yang sering diajukan
           </h2>
 
@@ -1003,7 +1003,7 @@ const GuestDashboard = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-hidden px-6 md:px-14 py-24 text-center max-w-3xl mx-auto">
+      <section className="section-hidden px-6 md:px-14 py-14 text-center max-w-3xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-semibold leading-tight" style={{ fontFamily: "Fraunces, serif" }}>
           Kulitmu pantas mendapat perhatian yang tepat.
         </h2>
@@ -1016,15 +1016,15 @@ const GuestDashboard = () => {
       </section>
 
       {/* KONTAK */}
-      <section id="contact" className="section-hidden px-6 md:px-14 py-16 max-w-7xl mx-auto" style={{ background: BG_ALT }}>
+      <section id="contact" className="section-hidden px-6 md:px-14 py-10 max-w-7xl mx-auto" style={{ background: BG_ALT }}>
         <p className="text-xs font-medium tracking-[0.2em] uppercase mb-2" style={{ color: SAGE }}>
           Kontak
         </p>
-        <h2 className="text-3xl font-semibold mb-10" style={{ fontFamily: "Fraunces, serif" }}>
+        <h2 className="text-3xl font-semibold mb-6" style={{ fontFamily: "Fraunces, serif" }}>
           Hubungi kami
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {/* Info Kontak */}
           <div className="space-y-4">
             {[
@@ -1064,7 +1064,7 @@ const GuestDashboard = () => {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: INK }} className="px-6 md:px-14 py-16 text-white">
+      <footer style={{ background: INK }} className="px-6 md:px-14 py-12 text-white">
         <div className="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Perusahaan */}
           <div>
