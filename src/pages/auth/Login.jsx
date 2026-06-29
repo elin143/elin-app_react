@@ -1,247 +1,371 @@
 import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaEnvelope, FaLock, FaArrowRight, FaFacebook } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
 import { GiTerror } from "react-icons/gi";
-import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { loginAPI } from "../../services/loginAPI";
 
 export default function Login() {
-  const Image = "/img/image.png";
-    const navigate = useNavigate() 
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
-    const [dataForm, setDataForm] = useState({
-        email: "",
-        password: "",
-    })
+  const navigate = useNavigate();
 
-    const handleChange = (evt) => {
-        const { name, value } = evt.target
-        setDataForm({
-            ...dataForm,
-            [name]: value,
-        })
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const [dataForm, setDataForm] = useState({
+    username: "",
+    password: "",
+    role: "member",
+  });
+
+  const handleChange = (e) => {
+    setDataForm({
+      ...dataForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const user = await loginAPI.login(
+        dataForm.username,
+        dataForm.password
+      );
+
+      if (!user) {
+        setError("Invalid username or password.");
+        return;
+      }
+
+      if (user.role !== dataForm.role) {
+        setError("Selected role does not match your account.");
+        return;
+      }
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(user)
+      );
+
+      switch (user.role) {
+        case "admin":
+          navigate("/Dashboard");
+          break;
+
+        case "member":
+          navigate("/Member");
+          break;
+
+        default:
+          navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Login failed.");
+    } finally {
+      setLoading(false);
     }
-    const handleSubmit = async (e) => {
-		        e.preventDefault()
-		
-		        setLoading(true)
-		        setError(false)
-		
-            axios
-		            .post("https://dummyjson.com/user/login", {
-		                username: dataForm.email,
-		                password: dataForm.password,
-		            })
-		            .then((response) => {
-		                // Jika status bukan 200, tampilkan pesan error
-		                if (response.status !== 200) {
-		                    setError(response.data.message);
-		                    return; 
-		                }
-		
-		                // Redirect ke dashboard jika login sukses
-		                navigate("/");
-		            })
-		            .catch((err) => {
-		                if (err.response) {
-		                    setError(err.response.data.message || "An error occurred");
-		                } else {
-		                    setError(err.message || "An unknown error occurred");
-		                }
-		            })
-		            .finally(() => {
-		                setLoading(false); 
-		            });
-	
-		    }
+  };
 
-    const errorInfo = error ? (
-		    <div className="bg-red-200 mb-5 p-5 text-sm font-light text-gray-600 rounded flex items-center">
-		        <GiTerror  className="text-red-600 me-2 text-lg" />
-		        {error}
-		    </div>
-		) : null
-		
-		const loadingInfo = loading ? (
-		    <div className="bg-gray-200 mb-5 p-5 text-sm rounded flex items-center">
-		        <AiOutlineLoading3Quarters className="me-2 animate-spin" />
-		        Mohon Tunggu...
-		    </div>
-		) : null
- return (
-        <div>
-            <div className="w-full max-w-6xl min-h-[720px] grid lg:grid-cols-2 rounded-[2rem] overflow-hidden shadow-2xl bg-white">
+  return (
+    <div
+      className="
+      min-h-screen
+      flex
+      items-center
+      justify-center
+      px-6
+      py-12
+      "
+      style={{
+        background: "#FDF6F8",
+      }}
+    >
+      <div
+        className="
+        w-full
+        max-w-md
+        bg-white
+        rounded-[32px]
+        p-10
+        shadow-xl
+        "
+      >
+        {/* BRAND */}
+        <div className="mb-8 text-center">
+          <p
+            className="
+            uppercase
+            tracking-[0.25em]
+            text-xs
+            mb-3
+            "
+            style={{
+              color: "#A9748C",
+            }}
+          >
+            BeautyCare CRM
+          </p>
 
-                {/* LEFT SECTION */}
-                <div className="hidden lg:flex relative bg-[#0F2D3F]">
+          <h1
+            className="text-5xl mb-3"
+            style={{
+              fontFamily: "Fraunces, serif",
+              color: "#2E2228",
+            }}
+          >
+            Sign In
+          </h1>
 
-                    {/* Background Image */}
-                    <img
-                        src={Image}
-                        alt="Login Visual"
-                        className="absolute inset-0 w-full h-full object-cover"
-                    />
-
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-[#0F2D3F]/70" />
-
-                    {/* Soft Gradient Overlay */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.12),_transparent_35%),radial-gradient(circle_at_bottom_left,_rgba(255,255,255,0.08),_transparent_30%)]" />
-
-                    <div className="relative z-10 flex flex-col justify-between h-full text-white p-16">
-
-                        {/* Main Branding */}
-                        <div>
-                            <p className="uppercase tracking-[0.4em] text-sm text-white/70 font-semibold mb-6">
-                                Desktop
-                            </p>
-
-                            <h1 className="text-6xl font-extrabold leading-tight">
-                                Welcome
-                                <br />
-                                Back
-                            </h1>
-
-                        </div>
-
-              
-
-                    </div>
-                </div>
-
-                {/* RIGHT FORM SECTION */}
-                <div className="flex items-center justify-center px-8 md:px-20 py-14 bg-white">
-                    <div className="w-full max-w-md">
-
-                        {/* Header */}
-                        <div className="mb-10">
-                            <h2 className="text-4xl font-bold text-[#1F2937] flex items-center gap-2">
-                                Welcome Back <span className="text-3xl">👋</span>
-                            </h2>
-
-                            <p className="text-[#4B5563] mt-4 leading-relaxed">
-                                Today is a new day. It's your day. You shape it.
-                                Sign in to start managing your projects.
-                            </p>
-                        </div>
-
-                        {errorInfo}
-                        {loadingInfo}
-
-                        {/* Form */}
-                        <form className="space-y-5" onSubmit={handleSubmit}>
-
-                            {/* Email */}
-                            <div>
-                                <label className="block text-sm font-medium text-[#1F2937] mb-2">
-                                    Email
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="email"
-                                    value={dataForm.email}
-                                    onChange={handleChange}
-                                    placeholder="Username"
-                                    className="w-full h-12 rounded-xl border border-[#D1D5DB] bg-[#F3F4F6] px-4 text-gray-700 placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0F2D3F]"
-                                    required
-                                />
-                            </div>
-
-                            {/* Password */}
-                            <div>
-                                <label className="block text-sm font-medium text-[#1F2937] mb-2">
-                                    Password
-                                </label>
-
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={dataForm.password}
-                                    onChange={handleChange}
-                                    placeholder="At least 8 characters"
-                                    className="w-full h-12 rounded-xl border border-[#D1D5DB] bg-[#F3F4F6] px-4 text-gray-700 placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0F2D3F]"
-                                    required
-                                />
-                            </div>
-
-                            {/* Forgot Password */}
-                            <div className="flex justify-end">
-                                <Link
-                                    to="/forgot"
-                                    className="text-sm text-[#3B5BFF] hover:underline"
-                                >
-                                    Forgot Password?
-                                </Link>
-                            </div>
-
-                            {/* Submit */}
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full h-12 rounded-xl bg-[#0F2D3F] text-white font-semibold text-lg hover:bg-[#1E4257] transition-all disabled:opacity-70 flex items-center justify-center"
-                            >
-                                {loading ? (
-                                    <span className="flex items-center gap-2">
-                                        <AiOutlineLoading3Quarters className="animate-spin" />
-                                        Signing in...
-                                    </span>
-                                ) : (
-                                    "Sign in"
-                                )}
-                            </button>
-
-                        </form>
-
-                        {/* Divider */}
-                        <div className="flex items-center gap-4 my-8">
-                            <div className="flex-1 h-px bg-[#E5E7EB]" />
-                            <span className="text-sm text-gray-400">Or</span>
-                            <div className="flex-1 h-px bg-[#E5E7EB]" />
-                        </div>
-
-                        {/* Social Login */}
-                        <div className="space-y-4">
-
-                            <button
-                                type="button"
-                                className="w-full h-12 rounded-xl bg-[#F3F4F6] border border-[#E5E7EB] flex items-center justify-center gap-3 text-gray-700 font-medium hover:bg-gray-100 transition"
-                            >
-                                <FcGoogle className="text-xl" />
-                                Sign in with Google
-                            </button>
-
-                            <button
-                                type="button"
-                                className="w-full h-12 rounded-xl bg-[#F3F4F6] border border-[#E5E7EB] flex items-center justify-center gap-3 text-gray-700 font-medium hover:bg-gray-100 transition"
-                            >
-                                <FaFacebook className="text-blue-600 text-xl" />
-                                Sign in with Facebook
-                            </button>
-
-                        </div>
-
-                        {/* Register */}
-                        <p className="mt-8 text-center text-[#4B5563]">
-                            Don't you have an account?{" "}
-                            <Link
-                                to="/register"
-                                className="text-[#3B5BFF] font-semibold hover:underline"
-                            >
-                                Sign up
-                            </Link>
-                        </p>
-
-                        {/* Footer */}
-                        <p className="mt-16 text-center text-xs text-[#9CA3AF]">
-                            © 2023 ALL RIGHTS RESERVED
-                        </p>
-
-                    </div>
-                </div>
-            </div>
+          <p className="text-stone-500">
+            Continue your personalized beauty journey.
+          </p>
         </div>
-    );
+
+        {/* ERROR */}
+        {error && (
+          <div
+            className="
+            mb-5
+            p-4
+            rounded-2xl
+            flex
+            items-center
+            gap-2
+            "
+            style={{
+              background: "#FDECEC",
+              color: "#D32F2F",
+            }}
+          >
+            <GiTerror />
+            {error}
+          </div>
+        )}
+
+        <form
+          className="space-y-5"
+          onSubmit={handleSubmit}
+        >
+          {/* USERNAME */}
+          <div>
+            <label className="block text-sm mb-2 font-medium text-stone-700">
+              Username
+            </label>
+
+            <input
+              type="text"
+              name="username"
+              value={dataForm.username}
+              onChange={handleChange}
+              placeholder="Enter your username"
+              className="
+                w-full
+                h-14
+                rounded-full
+                px-5
+                outline-none
+                bg-white
+              "
+              style={{
+                border: "1px solid #E7D6DD",
+              }}
+              required
+            />
+          </div>
+
+          {/* PASSWORD */}
+          <div>
+            <label className="block text-sm mb-2 font-medium text-stone-700">
+              Password
+            </label>
+
+            <input
+              type="password"
+              name="password"
+              value={dataForm.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              className="
+                w-full
+                h-14
+                rounded-full
+                px-5
+                outline-none
+                bg-white
+              "
+              style={{
+                border: "1px solid #E7D6DD",
+              }}
+              required
+            />
+          </div>
+
+          {/* ROLE */}
+          <div>
+            <label className="block text-sm mb-3 font-medium text-stone-700">
+              Account Type
+            </label>
+
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  setDataForm({
+                    ...dataForm,
+                    role: "member",
+                  })
+                }
+                className="h-14 rounded-2xl font-medium transition"
+                style={{
+                  background:
+                    dataForm.role === "member"
+                      ? "#B85C7A"
+                      : "#FFFFFF",
+                  color:
+                    dataForm.role === "member"
+                      ? "#FFFFFF"
+                      : "#2E2228",
+                  border: "1px solid #E7D6DD",
+                }}
+              >
+                Member
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setDataForm({
+                    ...dataForm,
+                    role: "admin",
+                  })
+                }
+                className="h-14 rounded-2xl font-medium transition"
+                style={{
+                  background:
+                    dataForm.role === "admin"
+                      ? "#B85C7A"
+                      : "#FFFFFF",
+                  color:
+                    dataForm.role === "admin"
+                      ? "#FFFFFF"
+                      : "#2E2228",
+                  border: "1px solid #E7D6DD",
+                }}
+              >
+                Admin
+              </button>
+            </div>
+          </div>
+
+          {/* LOGIN BUTTON */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="
+              w-full
+              h-14
+              rounded-full
+              text-white
+              font-semibold
+              transition
+              hover:opacity-90
+            "
+            style={{
+              background: "#B85C7A",
+            }}
+          >
+            {loading ? (
+              <AiOutlineLoading3Quarters className="animate-spin mx-auto text-xl" />
+            ) : (
+              "Sign In"
+            )}
+          </button>
+        </form>
+
+        {/* DEMO LOGIN */}
+        <div className="mt-8">
+          <p className="text-sm text-stone-500 mb-3">
+            Demo Account
+          </p>
+
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() =>
+                setDataForm({
+                  username: "member",
+                  password: "123",
+                  role: "member",
+                })
+              }
+              className="
+                flex-1
+                py-2
+                rounded-full
+                text-sm
+              "
+              style={{
+                border: "1px solid #E7D6DD",
+              }}
+            >
+              Member
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                setDataForm({
+                  username: "admin",
+                  password: "123",
+                  role: "admin",
+                })
+              }
+              className="
+                flex-1
+                py-2
+                rounded-full
+                text-sm
+              "
+              style={{
+                border: "1px solid #E7D6DD",
+              }}
+            >
+              Admin
+            </button>
+          </div>
+        </div>
+
+        {/* REGISTER */}
+        <p className="mt-8 text-center text-sm text-stone-600">
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            className="font-semibold"
+            style={{
+              color: "#B85C7A",
+            }}
+          >
+            Join Membership
+          </Link>
+        </p>
+
+        {/* BACK */}
+        <div className="mt-4 text-center">
+          <Link
+            to="/"
+            className="text-sm"
+            style={{
+              color: "#A9748C",
+            }}
+          >
+            ← Back to Home
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }

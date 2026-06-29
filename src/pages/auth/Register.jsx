@@ -1,104 +1,185 @@
-import { FaEnvelope, FaLock, FaPhone, FaUser, FaArrowRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaArrowRight, FaLock, FaUser } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { loginAPI } from "../../services/loginAPI";
 
 export default function Register() {
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const [dataForm, setDataForm] = useState({
+    username: "",
+    password: "",
+    role: "member",
+  });
+
+  const handleChange = (e) => {
+    setDataForm({
+      ...dataForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const user = await loginAPI.register({
+        username: dataForm.username,
+        password: dataForm.password,
+        role: dataForm.role,
+        tier: dataForm.role === "member" ? "Regular" : null,
+      });
+
+      if (!user) {
+        throw new Error("Gagal mendapatkan data user dari server.");
+      }
+
+      navigate("/login");
+    } catch (err) {
+  console.log("STATUS:", err.response?.status);
+  console.log("DATA:", err.response?.data);
+  console.log("FULL ERROR:", err);
+
+  throw new Error(
+    err.response?.data?.message ||
+    err.response?.data?.error ||
+    JSON.stringify(err.response?.data)
+  );
+    }
+  }
+
   return (
-    <div className="w-full min-h-[720px] grid lg:grid-cols-2 rounded-[3rem] overflow-hidden shadow-2xl bg-white">
-      
-      {/* LEFT VISUAL SECTION */}
-      <div className="hidden lg:flex relative bg-gradient-to-br from-rose-300 via-pink-300 to-pink-200 p-16">
-        
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.35),_transparent_35%),radial-gradient(circle_at_bottom_left,_rgba(255,255,255,0.25),_transparent_30%)]" />
+    <div className="min-h-screen flex justify-center items-center bg-[#FDF6F8] px-6">
+      <div className="bg-white rounded-[32px] shadow-xl p-10 w-full max-w-md">
 
-        <div className="relative z-10 flex flex-col justify-between h-full text-white">
-          
-          <div>
-            <h1 className="text-6xl font-black font-serif italic leading-tight">
-              Join
-              <br />
-              Beauty Clinic
-            </h1>
-
-            <p className="mt-8 text-lg leading-relaxed text-white/90 max-w-lg">
-              Build your elegant beauty clinic system and manage treatments,
-              patients, schedules, and premium experiences beautifully.
-            </p>
-          </div>
-
-          <div className="bg-white/20 backdrop-blur-md rounded-3xl p-6 max-w-md border border-white/30">
-            <p className="text-sm uppercase tracking-[0.3em] mb-3">
-              Premium Management
-            </p>
-            <p className="text-2xl font-bold">
-              Start your luxury clinic journey today.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-      {/* RIGHT FORM */}
-      <div className="flex items-center justify-center px-8 md:px-16 py-14 bg-white">
-        <div className="w-full max-w-lg">
-          
-          <div className="mb-10">
-            <p className="uppercase tracking-[0.4em] text-pink-300 text-sm font-bold mb-4">
-              Create Account
-            </p>
-
-            <h2 className="text-5xl font-black text-gray-800 leading-tight">
-              Register
-            </h2>
-
-            <p className="text-gray-400 mt-4 text-lg">
-              Create your beauty management account.
-            </p>
-          </div>
-
-          <form className="space-y-5">
-            
-            <div className="relative">
-              <FaUser className="absolute top-5 left-5 text-pink-300" />
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full rounded-2xl border border-pink-100 bg-pink-50/40 py-5 pl-14 pr-4"
-              />
-            </div>
-
-            <div className="relative">
-              <FaEnvelope className="absolute top-5 left-5 text-pink-300" />
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full rounded-2xl border border-pink-100 bg-pink-50/40 py-5 pl-14 pr-4"
-              />
-            </div>
-
-            <div className="relative">
-              <FaLock className="absolute top-5 left-5 text-pink-300" />
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full rounded-2xl border border-pink-100 bg-pink-50/40 py-5 pl-14 pr-4"
-              />
-            </div>
-
-            <button className="group w-full py-5 rounded-2xl bg-gradient-to-r from-pink-300 to-rose-300 text-white font-bold text-lg flex items-center justify-center gap-3 hover:shadow-xl transition-all">
-              Create Account
-              <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
-
-          </form>
-
-          <p className="mt-8 text-gray-500 text-center">
-            Already have an account?{" "}
-            <Link to="/login" className="text-pink-400 font-bold">
-              Sign In
-            </Link>
+        <div className="text-center mb-8">
+          <p className="uppercase tracking-[0.25em] text-xs text-[#A9748C] mb-3">
+            BeautyCare CRM
           </p>
 
+          <h1
+            className="text-5xl"
+            style={{
+              fontFamily: "Fraunces, serif",
+              color: "#2E2228",
+            }}
+          >
+            Register
+          </h1>
+
+          <p className="text-stone-500 mt-3">
+            Create your account.
+          </p>
         </div>
+
+        {error && (
+          <div className="bg-red-100 text-red-600 rounded-xl p-3 mb-5">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+
+          <div className="relative">
+            <FaUser className="absolute left-5 top-5 text-pink-400" />
+
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={dataForm.username}
+              onChange={handleChange}
+              className="w-full h-14 rounded-full pl-14 pr-4 border border-[#E7D6DD]"
+              required
+            />
+          </div>
+
+          <div className="relative">
+            <FaLock className="absolute left-5 top-5 text-pink-400" />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={dataForm.password}
+              onChange={handleChange}
+              className="w-full h-14 rounded-full pl-14 pr-4 border border-[#E7D6DD]"
+              required
+            />
+          </div>
+
+          {/* ROLE */}
+          <div>
+            <label className="block text-sm mb-3 font-medium text-stone-700">
+              Account Type
+            </label>
+
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  setDataForm({ ...dataForm, role: "member" })
+                }
+                className="h-14 rounded-2xl font-medium transition"
+                style={{
+                  background: dataForm.role === "member" ? "#B85C7A" : "#FFFFFF",
+                  color: dataForm.role === "member" ? "#FFFFFF" : "#2E2228",
+                  border: "1px solid #E7D6DD",
+                }}
+              >
+                Member
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setDataForm({ ...dataForm, role: "admin" })
+                }
+                className="h-14 rounded-2xl font-medium transition"
+                style={{
+                  background: dataForm.role === "admin" ? "#B85C7A" : "#FFFFFF",
+                  color: dataForm.role === "admin" ? "#FFFFFF" : "#2E2228",
+                  border: "1px solid #E7D6DD",
+                }}
+              >
+                Admin
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full h-14 rounded-full bg-[#B85C7A] text-white font-semibold flex justify-center items-center gap-2"
+          >
+            {loading ? (
+              <AiOutlineLoading3Quarters className="animate-spin" />
+            ) : (
+              <>
+                Create Account
+                <FaArrowRight />
+              </>
+            )}
+          </button>
+
+        </form>
+
+        <p className="text-center mt-8 text-sm">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-semibold text-[#B85C7A]"
+          >
+            Sign In
+          </Link>
+        </p>
       </div>
     </div>
   );
