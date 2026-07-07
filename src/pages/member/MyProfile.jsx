@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Tambahkan useEffect jika dibutuhkan di masa depan
 import { useNavigate } from "react-router-dom";
 import PageHeader from "../../components/PageHeader";
 import pasienData from "../../data/pasien.json";
@@ -26,14 +26,35 @@ const CARD_TINT = "#F1D3DD";
 
 export default function MyProfile() {
   const navigate = useNavigate();
+  
+  // 1. Ambil data user yang sedang login dari localStorage
   const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const patient = pasienData[0];
+  
+  // 2. Cari data pasien di json yang cocok dengan user yang sedang login
+  // Kita gunakan .find() bukan indeks statis [0]
+  const patient = pasienData.find(
+    (p) => p.patientId === user.patientId || p.email === user.email
+  ) || {
+    // Jalur alternatif (Fallback) jika data tidak ditemukan di JSON
+    name: user.username || "Guest",
+    age: "",
+    gender: "-",
+    phone: "-",
+    email: user.email || "-",
+    allergiesSkinType: "-",
+    treatmentHistory: "",
+    membershipStatus: "Regular",
+    patientId: "NEW"
+  };
+
   const memberTier = JSON.parse(localStorage.getItem("memberTier") || "null");
   const currentTier = memberTier?.tier || user?.tier || "Regular";
+  
   const [editing, setEditing] = useState(false);
   const [toast, setToast] = useState(null);
   const [saving, setSaving] = useState(false);
 
+  // 3. Masukkan data 'patient' hasil pencarian ke dalam state form
   const [form, setForm] = useState({
     name: patient.name,
     age: patient.age,
@@ -42,8 +63,24 @@ export default function MyProfile() {
     email: patient.email,
     allergiesSkinType: patient.allergiesSkinType,
     treatmentHistory: patient.treatmentHistory,
-    membershipStatus: Gold,
+    membershipStatus: patient.membershipStatus,
   });
+
+  // ... sisa kode HTML/JSX di bawahnya tetap sama ...
+
+  // Efek pendukung jika seandainya data user di localstorage berubah di tengah jalan
+  useEffect(() => {
+    setForm({
+      name: patient.name,
+      age: patient.age,
+      gender: patient.gender,
+      phone: patient.phone,
+      email: patient.email,
+      allergiesSkinType: patient.allergiesSkinType,
+      treatmentHistory: patient.treatmentHistory,
+      membershipStatus: patient.membershipStatus,
+    });
+  }, [patient.name]);
 
   const showToast = (msg) => {
     setToast(msg);
@@ -57,6 +94,10 @@ export default function MyProfile() {
   const handleSave = () => {
     setSaving(true);
     setTimeout(() => {
+      // 4. (Opsional) Jika ingin perubahan tersimpan di session login saat ini
+      const updatedUser = { ...user, username: form.name, email: form.email };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      
       setSaving(false);
       setEditing(false);
       showToast("Profile berhasil disimpan! ✅");
@@ -151,7 +192,7 @@ export default function MyProfile() {
               className="w-24 h-24 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4"
               style={{ background: `linear-gradient(135deg, ${ACCENT}, #8C4A63)`, color: "#FFFFFF" }}
             >
-              {form.name.charAt(0)}
+              {form.name ? form.name.charAt(0) : "?"}
             </div>
             <h2 className="text-xl font-semibold" style={{ color: INK }}>{form.name}</h2>
             <div className="flex items-center justify-center gap-1.5 mt-1.5 px-3 py-1 rounded-full mx-auto w-fit" style={{ background: BG_ALT }}>
@@ -179,11 +220,11 @@ export default function MyProfile() {
               </div>
               <div className="flex justify-between pb-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.2)" }}>
                 <span>Last Visit</span>
-                <span className="font-semibold">{patient.lastVisit}</span>
+                <span className="font-semibold">{patient.lastVisit || "-"}</span>
               </div>
               <div className="flex justify-between pb-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.2)" }}>
                 <span>Treatments</span>
-                <span className="font-semibold">{patient.treatmentHistory.split(",").length}</span>
+                <span className="font-semibold">{patient.treatmentHistory ? patient.treatmentHistory.split(",").length : 0}</span>
               </div>
               <div className="flex justify-between">
                 <span>Reward Points</span>

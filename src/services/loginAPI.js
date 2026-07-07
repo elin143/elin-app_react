@@ -37,7 +37,7 @@ export const loginAPI = {
     const payload = {
       username: username.trim(),
       password: password.trim(),
-      role,
+      role
     };
 
     try {
