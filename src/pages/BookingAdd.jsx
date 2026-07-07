@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FaTimes, FaCalendarPlus, FaUser, FaClock, FaStethoscope, FaComment } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { supabase } from "../services/supabaseClient";
 
 // THEME TOKENS
 const ACCENT = "#B85C7A";
@@ -84,18 +85,32 @@ export default function BookingAdd({ onClose, onSuccess }) {
     }
 
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
 
-    const newBooking = {
-      bookingId: `BK-${String(Math.floor(Math.random() * 900) + 100)}`,
-      ...form,
+    // Menyesuaikan payload HANYA dengan kolom yang ada di tabel 'bookings' Supabase Anda
+    const payload = {
+      patient_name: form.patientName,
+      treatment_type: form.treatmentType,
+      doctor_therapist: form.therapistDoctor,
+      date_time: form.dateTime,
       status: "Scheduled",
-      paymentStatus: "Pending",
+      payment_status: "Pending",
+      // Catatan: Kolom 'notes' dihapus dari payload karena tidak ada di schema database Anda
     };
 
-    onSuccess?.(newBooking);
-    onClose?.();
+    const { data, error } = await supabase
+      .from("bookings")
+      .insert([payload])
+      .select();
+
+    setLoading(false);
+
+    if (!error && data && data.length > 0) {
+      onSuccess?.();
+      onClose?.();
+    } else {
+      console.error("Gagal menyimpan booking baru:", error);
+      alert(`Terjadi kesalahan sistem: ${error?.message || "Gagal menyimpan ke database"}`);
+    }
   };
 
   return (

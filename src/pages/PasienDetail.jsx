@@ -1,27 +1,39 @@
-import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import pasienData from "../data/pasien.json"
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../services/supabaseClient";
 
 export default function PasienDetail() {
-    const { id } = useParams()
-    const [pasien, setPasien] = useState(null)
-    const [error, setError] = useState(null)
+    const { id } = useParams();
+    const [pasien, setPasien] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const foundPasien = pasienData.find(
-            (p) => p.patientId === id
-        )
+        const fetchPasien = async () => {
+            setLoading(true);
 
-        if (!foundPasien) {
-            setError("Pasien not found")
-            return
-        }
+            const { data, error } = await supabase
+                .from("patients")
+                .select("*")
+                .eq("patientId", id)
+                .single();
 
-        setPasien(foundPasien)
-    }, [id])
+            if (error || !data) {
+                setError("Pasien not found");
+                setLoading(false);
+                return;
+            }
 
-    if (error) return <div className="text-red-600 p-4">{error}</div>
-    if (!pasien) return <div className="p-4">Loading...</div>
+            setPasien(data);
+            setLoading(false);
+        };
+
+        fetchPasien();
+    }, [id]);
+
+    if (error) return <div className="text-red-600 p-4">{error}</div>;
+    if (loading) return <div className="p-4">Loading...</div>;
+    if (!pasien) return <div className="p-4">Pasien tidak ditemukan</div>;
 
     return (
         <div className="p-6 bg-white rounded-xl shadow-lg max-w-2xl mx-auto mt-6">
@@ -85,5 +97,5 @@ export default function PasienDetail() {
                 </span>
             </div>
         </div>
-    )
+    );
 }

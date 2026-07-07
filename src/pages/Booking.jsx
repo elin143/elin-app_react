@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import BookingAdd from "./BookingAdd";
-import bookingData from "../data/booking.json";
+import { supabase } from "../services/supabaseClient"; // Menggunakan client yang sudah ada
 import {
   FaSearch,
   FaFilter,
@@ -47,24 +47,24 @@ function EditForm({ booking, onSave, onCancel }) {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="text-xs font-medium mb-1 block" style={{ color: SAGE }}>Patient Name</label>
-          <input name="patientName" value={form.patientName} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }} />
+          <input name="patientName" value={form.patientName || ""} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }} />
         </div>
         <div>
           <label className="text-xs font-medium mb-1 block" style={{ color: SAGE }}>Date & Time</label>
-          <input name="dateTime" value={form.dateTime} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }} />
+          <input name="dateTime" value={form.dateTime || ""} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }} />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="text-xs font-medium mb-1 block" style={{ color: SAGE }}>Treatment Type</label>
-          <select name="treatmentType" value={form.treatmentType} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
+          <select name="treatmentType" value={form.treatmentType || ""} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
             {treatmentOptions.map((t) => (<option key={t} value={t}>{t}</option>))}
           </select>
         </div>
         <div>
           <label className="text-xs font-medium mb-1 block" style={{ color: SAGE }}>Doctor</label>
-          <select name="therapistDoctor" value={form.therapistDoctor} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
+          <select name="therapistDoctor" value={form.therapistDoctor || ""} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
             {doctorOptions.map((d) => (<option key={d} value={d}>{d}</option>))}
           </select>
         </div>
@@ -73,7 +73,7 @@ function EditForm({ booking, onSave, onCancel }) {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="text-xs font-medium mb-1 block" style={{ color: SAGE }}>Status</label>
-          <select name="status" value={form.status} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
+          <select name="status" value={form.status || "Scheduled"} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
             <option value="Scheduled">Scheduled</option>
             <option value="Completed">Completed</option>
             <option value="Cancelled">Cancelled</option>
@@ -82,7 +82,7 @@ function EditForm({ booking, onSave, onCancel }) {
         </div>
         <div>
           <label className="text-xs font-medium mb-1 block" style={{ color: SAGE }}>Payment Status</label>
-          <select name="paymentStatus" value={form.paymentStatus} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
+          <select name="paymentStatus" value={form.paymentStatus || "Pending"} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl outline-none text-sm bg-white" style={{ border: `1px solid ${CARD_TINT}`, color: INK }}>
             <option value="Paid">Paid</option>
             <option value="Pending">Pending</option>
             <option value="Refunded">Refunded</option>
@@ -156,7 +156,8 @@ export default function Booking() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [bookings, setBookings] = useState(bookingData);
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(null);
   const [editModal, setEditModal] = useState(null);
@@ -167,12 +168,81 @@ export default function Booking() {
     setTimeout(() => setToast(null), 2500);
   };
 
-  const handleEditSave = (updated) => {
-    setBookings((prev) =>
-      prev.map((b) => (b.bookingId === updated.bookingId ? updated : b))
-    );
-    setEditModal(null);
-    showToast(`Booking #${updated.bookingId} berhasil diperbarui! ✅`);
+  // 1. READ: AMBIL DATA DARI SUPABASE
+  const fetchBookings = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("bookings")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      const mappedBookings = data.map((b) => ({
+        bookingId: b.booking_id,
+        patientId: b.patient_id,
+        treatmentId: b.treatment_id,
+        patientName: b.patient_name,
+        treatmentType: b.treatment_type,
+        therapistDoctor: b.doctor_therapist,
+        dateTime: b.date_time ? new Date(b.date_time).toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" }) : "",
+        status: b.status,
+        paymentStatus: b.payment_status,
+      }));
+      setBookings(mappedBookings);
+    } else if (error) {
+      console.error("Fetch Error:", error);
+      showToast("Gagal memuat data dari database ❌");
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  // 2. UPDATE: SIMPAN PERUBAHAN KE SUPABASE
+  const handleEditSave = async (updated) => {
+    const payload = {
+      patient_name: updated.patientName,
+      treatment_type: updated.treatmentType,
+      doctor_therapist: updated.therapistDoctor,
+      status: updated.status,
+      payment_status: updated.paymentStatus,
+      // Jika format input tanggal diganti manual, pastikan dikonversi kembali ke ISO string di sini jika diperlukan
+    };
+
+    const { error } = await supabase
+      .from("bookings")
+      .update(payload)
+      .eq("booking_id", updated.bookingId);
+
+    if (!error) {
+      setBookings((prev) =>
+        prev.map((b) => (b.bookingId === updated.bookingId ? updated : b))
+      );
+      setEditModal(null);
+      showToast(`Booking #${updated.bookingId.substring(0,8)}... berhasil diperbarui! ✅`);
+    } else {
+      console.error("Update Error:", error);
+      showToast(`Gagal memperbarui: ${error.message} ❌`);
+    }
+  };
+
+  // 3. DELETE: HAPUS JADWAL DARI SUPABASE
+  const handleDeleteBooking = async (id) => {
+    const { error } = await supabase
+      .from("bookings")
+      .delete()
+      .eq("booking_id", id);
+
+    if (!error) {
+      setBookings((prev) => prev.filter((b) => b.bookingId !== id));
+      setDeleteModal(null);
+      showToast(`Booking berhasil dihapus! ✅`);
+    } else {
+      console.error("Delete Error:", error);
+      showToast("Gagal menghapus data dari database ❌");
+    }
   };
 
   // Stats
@@ -187,10 +257,10 @@ export default function Booking() {
   // Filter
   const filtered = bookings.filter((b) => {
     const matchesSearch =
-      b.patientName.toLowerCase().includes(search.toLowerCase()) ||
-      b.treatmentType.toLowerCase().includes(search.toLowerCase()) ||
-      b.therapistDoctor.toLowerCase().includes(search.toLowerCase()) ||
-      b.bookingId.toLowerCase().includes(search.toLowerCase());
+      (b.patientName?.toLowerCase() || "").includes(search.toLowerCase()) ||
+      (b.treatmentType?.toLowerCase() || "").includes(search.toLowerCase()) ||
+      (b.therapistDoctor?.toLowerCase() || "").includes(search.toLowerCase()) ||
+      (b.bookingId?.toLowerCase() || "").includes(search.toLowerCase());
     const matchesStatus = statusFilter === "All" || b.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -301,7 +371,7 @@ export default function Booking() {
           >
             <Icon className="text-xl mb-2" style={{ color }} />
             <h3 className="text-2xl font-semibold" style={{ fontFamily: "Fraunces, serif", color: INK }}>
-              {value}
+              {loading ? "..." : value}
             </h3>
             <p className="text-xs mt-1" style={{ color: SAGE }}>{label}</p>
           </div>
@@ -360,50 +430,56 @@ export default function Booking() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((b) => {
-                const sBadge = statusBadgeStyle(b.status);
-                const pBadge = paymentBadgeStyle(b.paymentStatus);
-                return (
-                  <tr key={b.bookingId} className="border-b transition-all duration-200 hover:bg-white" style={{ borderColor: CARD_TINT }}>
-                    <td className="p-4">
-                      <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: BG_ALT, color: ACCENT }}>
-                        #{b.bookingId}
-                      </span>
-                    </td>
-                    <td className="p-4">
-                      <Link to={`/Booking/${b.bookingId}`} className="font-semibold text-sm transition-colors hover:opacity-70" style={{ color: INK }}>
-                        {b.patientName}
-                      </Link>
-                    </td>
-                    <td className="p-4 text-sm font-medium" style={{ color: INK }}>{b.treatmentType}</td>
-                    <td className="p-4 text-sm" style={{ color: SAGE }}>{b.therapistDoctor}</td>
-                    <td className="p-4 text-xs font-medium" style={{ color: SAGE }}>{b.dateTime}</td>
-                    <td className="p-4">
-                      <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider" style={{ background: sBadge.bg, color: sBadge.color }}>
-                        {b.status}
-                      </span>
-                    </td>
-                    <td className="p-4">
-                      <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider" style={{ background: pBadge.bg, color: pBadge.color }}>
-                        {b.paymentStatus}
-                      </span>
-                    </td>
-                    <td className="p-4">
-                      <div className="flex items-center gap-2">
-                        <button onClick={() => navigate(`/Booking/${b.bookingId}`)} className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-white" style={{ color: SAGE, border: `1px solid ${CARD_TINT}` }} aria-label="View" title="View">
-                          <FaEye size={13} />
-                        </button>
-                        <button onClick={() => setEditModal(b)} className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-white" style={{ color: AMBER, border: `1px solid ${CARD_TINT}` }} aria-label="Edit" title="Edit">
-                          <FaEdit size={13} />
-                        </button>
-                        <button onClick={() => setDeleteModal(b)} className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-red-50" style={{ color: "#D32F2F", border: `1px solid ${CARD_TINT}` }} aria-label="Delete" title="Delete">
-                          <FaTrash size={13} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+              {loading ? (
+                <tr><td colSpan={8} className="p-8 text-center text-sm" style={{ color: SAGE }}>Memuat data booking...</td></tr>
+              ) : filtered.length === 0 ? (
+                <tr><td colSpan={8} className="p-8 text-center text-sm" style={{ color: SAGE }}>Tidak ada jadwal booking yang ditemukan.</td></tr>
+              ) : (
+                filtered.map((b) => {
+                  const sBadge = statusBadgeStyle(b.status);
+                  const pBadge = paymentBadgeStyle(b.paymentStatus);
+                  return (
+                    <tr key={b.bookingId} className="border-b transition-all duration-200 hover:bg-white" style={{ borderColor: CARD_TINT }}>
+                      <td className="p-4">
+                        <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: BG_ALT, color: ACCENT }}>
+                          #{b.bookingId ? b.bookingId.substring(0, 8) + "..." : "N/A"}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <Link to={`/Booking/${b.bookingId}`} className="font-semibold text-sm transition-colors hover:opacity-70" style={{ color: INK }}>
+                          {b.patientName}
+                        </Link>
+                      </td>
+                      <td className="p-4 text-sm font-medium" style={{ color: INK }}>{b.treatmentType}</td>
+                      <td className="p-4 text-sm" style={{ color: SAGE }}>{b.therapistDoctor}</td>
+                      <td className="p-4 text-xs font-medium" style={{ color: SAGE }}>{b.dateTime}</td>
+                      <td className="p-4">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider" style={{ background: sBadge.bg, color: sBadge.color }}>
+                          {b.status}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider" style={{ background: pBadge.bg, color: pBadge.color }}>
+                          {b.paymentStatus}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex items-center gap-2">
+                          <button onClick={() => navigate(`/Booking/${b.bookingId}`)} className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-white" style={{ color: SAGE, border: `1px solid ${CARD_TINT}` }} aria-label="View" title="View">
+                            <FaEye size={13} />
+                          </button>
+                          <button onClick={() => setEditModal(b)} className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-white" style={{ color: AMBER, border: `1px solid ${CARD_TINT}` }} aria-label="Edit" title="Edit">
+                            <FaEdit size={13} />
+                          </button>
+                          <button onClick={() => setDeleteModal(b)} className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-red-50" style={{ color: "#D32F2F", border: `1px solid ${CARD_TINT}` }} aria-label="Delete" title="Delete">
+                            <FaTrash size={13} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>
@@ -422,11 +498,11 @@ export default function Booking() {
                 <FaTrash size={28} style={{ color: "#D32F2F" }} />
               </div>
               <h3 className="text-xl font-semibold mb-2" style={{ color: INK }}>Hapus Booking</h3>
-              <p className="text-sm" style={{ color: SAGE }}>Yakin hapus booking <strong>#{deleteModal.bookingId}</strong> — <em>{deleteModal.patientName}</em>? Tindakan ini tidak bisa dibatalkan.</p>
+              <p className="text-sm" style={{ color: SAGE }}>Yakin hapus booking <strong>#{deleteModal.bookingId.substring(0,8)}...</strong> — <em>{deleteModal.patientName}</em>? Tindakan ini tidak bisa dibatalkan.</p>
             </div>
             <div className="flex gap-3">
               <button onClick={() => setDeleteModal(null)} className="flex-1 py-3 rounded-full text-sm font-medium transition-all hover:bg-gray-50" style={{ border: `1px solid ${CARD_TINT}`, color: SAGE }}>Batal</button>
-              <button onClick={() => { setBookings((prev) => prev.filter((b) => b.bookingId !== deleteModal.bookingId)); showToast(`Booking #${deleteModal.bookingId} berhasil dihapus!`); setDeleteModal(null); }} className="flex-1 py-3 rounded-full text-sm font-medium text-white transition-all hover:opacity-90 active:scale-95" style={{ background: "#D32F2F" }}>Ya, Hapus</button>
+              <button onClick={() => handleDeleteBooking(deleteModal.bookingId)} className="flex-1 py-3 rounded-full text-sm font-medium text-white transition-all hover:opacity-90 active:scale-95" style={{ background: "#D32F2F" }}>Ya, Hapus</button>
             </div>
           </div>
         </div>
@@ -439,7 +515,7 @@ export default function Booking() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-xs font-medium tracking-[0.2em] uppercase mb-1" style={{ color: SAGE }}>Edit Booking</p>
-                <h3 className="text-2xl font-semibold" style={{ fontFamily: "Fraunces, serif", color: INK }}>#{editModal.bookingId}</h3>
+                <h3 className="text-2xl font-semibold" style={{ fontFamily: "Fraunces, serif", color: INK }}>#{editModal.bookingId.substring(0,8)}...</h3>
               </div>
               <button onClick={() => setEditModal(null)} className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-50" style={{ border: `1px solid ${CARD_TINT}`, color: SAGE }} aria-label="Tutup"><FaTimes size={16} /></button>
             </div>
@@ -452,9 +528,9 @@ export default function Booking() {
       {showBookingModal && (
         <BookingAdd
           onClose={() => setShowBookingModal(false)}
-          onSuccess={(newBooking) => {
-            setBookings((prev) => [newBooking, ...prev]);
-            showToast(`Booking #${newBooking.bookingId} untuk ${newBooking.patientName} berhasil dibuat! \u2705`);
+          onSuccess={() => {
+            fetchBookings(); // Ambil ulang data segar dari Supabase setelah booking sukses dibuat
+            showToast("Booking baru berhasil dibuat! ✅");
           }}
         />
       )}

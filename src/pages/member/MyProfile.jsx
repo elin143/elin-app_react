@@ -42,6 +42,7 @@ export default function MyProfile() {
     email: patient.email,
     allergiesSkinType: patient.allergiesSkinType,
     treatmentHistory: patient.treatmentHistory,
+    membershipStatus: Gold,
   });
 
   const showToast = (msg) => {

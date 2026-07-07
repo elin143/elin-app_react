@@ -1,23 +1,11 @@
 [
-    {
-    "patientId": "PT-0001",
+  {
+    "patientId": "PT-001",
     "name": "Seonghyeon",
     "age": 28,
     "gender": "Male",
     "phone": "081234567801",
-    "email": "seonghyeon@email.com",
-    "treatmentHistory": "Brightening Facial, Acne Treatment",
-    "allergiesSkinType": "Oily Skin, No Allergies",
-    "membershipStatus": "Gold",
-    "lastVisit": "2026-04-01"
-  },
-  {
-    "patientId": "PT-001",
-    "name": "Andi Saputra",
-    "age": 28,
-    "gender": "Male",
-    "phone": "081234567801",
-    "email": "andi.saputra@email.com",
+    "email": "Seonghyeon@email.com",
     "treatmentHistory": "Brightening Facial, Acne Treatment",
     "allergiesSkinType": "Oily Skin, No Allergies",
     "membershipStatus": "Gold",
